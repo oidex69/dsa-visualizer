@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:thymleaf="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Title</title>
+    <link rel="stylesheet" th:href="${homePageCss}">
 </head>
 <body>
-
+    <p id = "h">THis is css effected</p>
+    <div th:each="p : ${text}">
+        <p th:text="${p.name}"></p>
+        <p th:text="${p.image}"></p>
+        <p th:text="${p.role}"></p>
+    </div>
 </body>
 </html>

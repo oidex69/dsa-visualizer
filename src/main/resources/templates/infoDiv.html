@@ -1,0 +1,13 @@
+<div th:fragment="infoDivision" id="infoDiv">
+    <div th:each="algo : ${algorithms}">
+        <h3 th:text="${algo.key}"></h3>
+        <div th:each="loop : ${algo.value}">
+            <p th:text="${loop.algorithmName}"></p>
+            <a th:href="${loop.link}">Visualize</a>
+        </div>
+    </div>
+</div>
+
+<div th:fragment = "helloworldFragment">
+    <div>This is called from ronak</div>
+</div>
