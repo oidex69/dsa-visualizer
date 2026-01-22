@@ -92,7 +92,6 @@
     </style>
 </head>
 <body>
-
 <h1 th:text="${title}"></h1>
 
 <div id="array-container"></div>
@@ -116,6 +115,8 @@
         scriptFile = '/js/quickSort.js';
     } else if ( title === 'LinearSearch') {
         scriptFile = '/js/LinearSearch.js';
+    } else if ( title === 'BinarySearch') {
+        scriptFile = "/js/binarySearch.js";
     }
 
     if (scriptFile) {

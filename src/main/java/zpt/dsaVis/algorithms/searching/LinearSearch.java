@@ -42,10 +42,12 @@ public class LinearSearch implements SearchAlgorithm {
         return steps;
     }
 
+    @Override
     public void setTarget(int target) {
         this.target = target;
     }
 
+    @Override
     public int getTarget() {
         return target;
     }

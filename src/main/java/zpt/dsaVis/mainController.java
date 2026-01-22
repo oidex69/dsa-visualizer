@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import zpt.dsaVis.algorithms.Sorting.*;
+import zpt.dsaVis.algorithms.searching.BinarySearch;
 import zpt.dsaVis.algorithms.searching.LinearSearch;
 
 import java.util.ArrayList;
@@ -40,7 +41,8 @@ public class mainController {
                     "MergeSort", new MergeSort(),
                     "QuickSort", new QuickSort(),
                     "SelectionSort", new SelectionSort(),
-                    "LinearSearch", new LinearSearch()
+                    "LinearSearch", new LinearSearch(),
+                    "BinarySearch", new BinarySearch()
             );
 
         }
@@ -73,15 +75,14 @@ public class mainController {
             Model m
     ) {
 
-        int[] arrayToSort = {5, 3, 8, 4, 2}; // Example array
+        int[] arrayToSort = {1,2,3,4,5,6,7}; // Example array
         Algorithm sorter = objectList.get(projectKey);
+        if(sorter instanceof SearchAlgorithm)
+            ((SearchAlgorithm) sorter).setTarget(1);
         sorter.implementAlgorithm(arrayToSort);
+
         m.addAttribute("steps", sorter.getSteps());
-        Collection<String> arr = new ArrayList<>();
-        List<String> arr1;
         m.addAttribute("title",projectKey);
-        Object obj = objectList.get(projectKey);
-        m.addAttribute("chosen",obj);
         return "mainFunction";
 
     }
