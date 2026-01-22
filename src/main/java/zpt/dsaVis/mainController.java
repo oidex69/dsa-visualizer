@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import zpt.dsaVis.algorithms.BubbleSort;
+import zpt.dsaVis.algorithms.MergeSort;
+import zpt.dsaVis.algorithms.SelectionSort;
 import zpt.dsaVis.algorithms.insertionSort;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class mainController {
                         new algorithm("BubbleSort","/algo/BubbleSort"),
                         new algorithm("QuickSort","/algo/QuickSort"),
                         new algorithm("InsertionSort","/algo/InsertionSort"),
+                        new algorithm("SelectionSort","/algo/SelectionSort"),
+                        new algorithm("MergeSort","/algo/MergeSort"),
                         new algorithm("RadixSort","/algo/RadixSort")
                 ),
                 "Searching", List.of(
@@ -34,7 +38,9 @@ public class mainController {
 
             objectList = Map.of(
                     "BubbleSort", new BubbleSort(),
-                    "InsertionSort", new insertionSort()
+                    "InsertionSort", new insertionSort(),
+                    "MergeSort", new MergeSort(),
+                    "SelectionSort", new SelectionSort()
             );
 
         }

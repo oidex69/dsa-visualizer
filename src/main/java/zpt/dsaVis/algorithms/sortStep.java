@@ -3,7 +3,7 @@ package zpt.dsaVis.algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class bubbleSortStep {
+public class sortStep {
 
     private int[] beforeArray;         // Array state before swap
     private int[] afterArray;          // Array state after swap
@@ -12,9 +12,9 @@ public class bubbleSortStep {
     private List<Integer> sortedIndices = new ArrayList<>(); // Elements in final position
 
     // Constructors
-    public bubbleSortStep() {}
+    public sortStep() {}
 
-    public bubbleSortStep(
+    public sortStep(
             int[] beforeArray,
             int[] afterArray,
             int index1,

@@ -8,17 +8,17 @@ import java.util.List;
 
 public class insertionSort implements SortingAlgorithm {
 
-    private List<inserstionSortStep> steps = new ArrayList<>();
+    private List<sortStep> steps = new ArrayList<>();
 
     public insertionSort() {}
 
     @Override
-    public List<inserstionSortStep> getSteps() {
+    public List<sortStep> getSteps() {
         return steps;
     }
 
     void display() {
-        for (inserstionSortStep step : steps) {
+        for (sortStep step : steps) {
             System.out.println(Arrays.toString(step.getAfterArray()));
         }
     }
@@ -35,7 +35,7 @@ public class insertionSort implements SortingAlgorithm {
                 int[] before = arr.clone();
                 arr[j + 1] = arr[j];
                 int[] after = arr.clone();
-                steps.add(new inserstionSortStep(
+                steps.add(new sortStep(
                         before,
                         after,
                         j,
@@ -47,7 +47,7 @@ public class insertionSort implements SortingAlgorithm {
             int[] beforeInsert = arr.clone();
             arr[j + 1] = key;
             int[] afterInsert = arr.clone();
-            steps.add(new inserstionSortStep(
+            steps.add(new sortStep(
                     beforeInsert,
                     afterInsert,
                     j + 1,
@@ -57,7 +57,7 @@ public class insertionSort implements SortingAlgorithm {
         }
         // Entire array is now sorted
         sortedIndices.add(arr.length - 1);
-        steps.add(new inserstionSortStep(
+        steps.add(new sortStep(
                 arr.clone(),
                 arr.clone(),
                 -1,

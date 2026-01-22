@@ -5,23 +5,41 @@
     <title th:text="${title}">Bubble Sort Visualization</title>
     <style>
         .array-element {
-            display: inline-block;
             width: 40px;
             height: 40px;
-            margin: 5px;
+            display: inline-block;
+            margin: 2px;
             text-align: center;
             line-height: 40px;
-            background-color: lightgray;
             border: 1px solid black;
-            transition: all 0.5s ease;
-            position: relative;
         }
-        .current {
-            background-color: yellow; /* elements being compared */
+
+        .current { background-color: yellow; }       /* currently comparing */
+        .sorted { background-color: green; }        /* fixed */
+        .current-min { background-color: orange; }  /* current smallest */
+
+
+        /* Left subarray highlight */
+        .left-subarray {
+            background-color: #add8e6; /* light blue */
         }
-        .sorted {
-            background-color: lightgreen; /* elements in final position */
+
+        /* Right subarray highlight */
+        .right-subarray {
+            background-color: #f4a460; /* sandy brown */
         }
+
+        /* Currently comparing elements */
+        .current-left {
+            background-color: #00ff00; /* green */
+            border: 2px solid #008000;
+        }
+
+        .current-right {
+            background-color: #ff0000; /* red */
+            border: 2px solid #800000;
+        }
+
     </style>
 </head>
 <body>
@@ -35,111 +53,23 @@
 <button id="autoBtn">Auto</button>
 
 <script th:inline="javascript">
+    const title = [[${title}]]; // Thymeleaf injects the page title
     let steps = [[${steps}]]; // Thymeleaf injects backend precomputed steps
+    let scriptFile = '';
 
-    const container = document.getElementById('array-container');
-    let currentIndex = 0;
-    let interval;
+    if (title === 'SelectionSort') {
+        scriptFile = '/js/selectionSort.js';
+    } else if (title === 'BubbleSort' || title === 'InsertionSort') {
+        scriptFile = '/js/bubbleAndInsertion.js';
+    } else if(title === 'MergeSort')
+        scriptFile ='/js/mergeSort.js'
 
-    function renderStep(step, useAfter = false) {
-        const arr = useAfter ? step.afterArray : step.beforeArray;
-        const current = [step.index1, step.index2].filter(i => i >= 0);
-        const sorted = step.sortedIndices || [];
-
-        container.innerHTML = '';
-        arr.forEach((num, idx) => {
-            const div = document.createElement('div');
-            div.className = 'array-element';
-            div.textContent = num;
-            if (current.includes(idx)) div.classList.add('current');
-            if (sorted.includes(idx)) div.classList.add('sorted');
-            container.appendChild(div);
-        });
+    if (scriptFile) {
+        const script = document.createElement('script');
+        script.src = scriptFile;
+        script.defer = true; // optional, to wait until HTML is parsed
+        document.body.appendChild(script);
     }
-
-    async function playStep() {
-        if (currentIndex >= steps.length) return;
-        const step = steps[currentIndex];
-
-        console.log(`Step ${currentIndex+1}: Comparing indices ${step.index1},${step.index2}`);
-        console.log(`Array before swap: [${step.beforeArray.join(', ')}]`);
-
-        // Highlight comparison
-        renderStep(step, false);
-        await new Promise(r => setTimeout(r, 400));
-
-        // Swap if occurred
-        if (JSON.stringify(step.beforeArray) !== JSON.stringify(step.afterArray)) {
-            console.log('Swapping elements');
-            renderStep(step, true);
-            await new Promise(r => setTimeout(r, 400));
-        } else {
-            console.log('No swap needed');
-        }
-
-        console.log(`Array after step: [${step.afterArray.join(', ')}]`);
-        currentIndex++;
-    }
-
-    async function playStepReverse() {
-        if (currentIndex <= 0) return;
-        currentIndex--;
-        const step = steps[currentIndex];
-
-        console.log(`Step ${currentIndex+1} (Reverse): Comparing indices ${step.index1},${step.index2}`);
-        console.log(`Array after step: [${step.afterArray.join(', ')}]`);
-
-        // Show "after swap" first (current state)
-        renderStep(step, true);
-        await new Promise(r => setTimeout(r, 400));
-
-        // Then show "before swap" (undo swap)
-        if (JSON.stringify(step.beforeArray) !== JSON.stringify(step.afterArray)) {
-            console.log('Reverting swap');
-            renderStep(step, false);
-            await new Promise(r => setTimeout(r, 400));
-        } else {
-            console.log('No swap to revert');
-        }
-
-        console.log(`Array before step: [${step.beforeArray.join(', ')}]`);
-    }
-
-    function nextStep() {
-        playStep();
-    }
-
-    function prevStep() {
-        playStepReverse();
-    }
-
-    async function autoPlay() {
-        const autoBtn = document.getElementById('autoBtn');
-        if (interval) {
-            clearInterval(interval);
-            interval = null;
-            autoBtn.textContent = "Auto";
-        } else {
-            autoBtn.textContent = "Stop";
-            interval = setInterval(async () => {
-                if (currentIndex >= steps.length) {
-                    clearInterval(interval);
-                    interval = null;
-                    autoBtn.textContent = "Auto";
-                } else {
-                    await playStep();
-                }
-            }, 1000);
-        }
-    }
-
-    document.getElementById('nextBtn').addEventListener('click', nextStep);
-    document.getElementById('prevBtn').addEventListener('click', prevStep);
-    document.getElementById('autoBtn').addEventListener('click', autoPlay);
-
-    // Initial render
-    renderStep(steps[0]);
 </script>
-
 </body>
 </html>

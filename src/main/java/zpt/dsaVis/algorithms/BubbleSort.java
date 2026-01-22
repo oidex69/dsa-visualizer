@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BubbleSort implements SortingAlgorithm {
 
-    private List<bubbleSortStep> steps = new ArrayList<>();
+    private List<sortStep> steps = new ArrayList<>();
 
     @Override
     public void sort(int[] arr) {
@@ -30,7 +30,7 @@ public class BubbleSort implements SortingAlgorithm {
 
                 int[] after = arr.clone();
 
-                steps.add(new bubbleSortStep(
+                steps.add(new sortStep(
                         before,
                         after,
                         j,
@@ -41,7 +41,7 @@ public class BubbleSort implements SortingAlgorithm {
 
             sortedIndices.add(n - i - 1);
 
-            steps.add(new bubbleSortStep(
+            steps.add(new sortStep(
                     arr.clone(),
                     arr.clone(),
                     -1,
@@ -51,7 +51,7 @@ public class BubbleSort implements SortingAlgorithm {
         }
 
         sortedIndices.add(0);
-        steps.add(new bubbleSortStep(
+        steps.add(new sortStep(
                 arr.clone(),
                 arr.clone(),
                 -1,
@@ -61,7 +61,7 @@ public class BubbleSort implements SortingAlgorithm {
     }
 
     @Override
-    public List<bubbleSortStep> getSteps() {
+    public List<sortStep> getSteps() {
         return steps;
     }
 }
