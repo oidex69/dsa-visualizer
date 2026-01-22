@@ -1,4 +1,4 @@
-package zpt.dsaVis.algorithms;
+package zpt.dsaVis.algorithms.Sorting;
 
 import java.util.ArrayList;
 import java.util.List;

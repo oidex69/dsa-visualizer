@@ -1,4 +1,4 @@
-package zpt.dsaVis.algorithms;
+package zpt.dsaVis.algorithms.Sorting;
 
 import zpt.dsaVis.SortingAlgorithm;
 
@@ -24,7 +24,7 @@ public class insertionSort implements SortingAlgorithm {
     }
 
     @Override
-    public void sort(int[] arr) {
+    public void implementAlgorithm(int[] arr) {
         List<Integer> sortedIndices = new ArrayList<>();
         for (int i = 1; i < arr.length; i++) {
             int key = arr[i];

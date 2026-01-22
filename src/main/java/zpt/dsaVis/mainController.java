@@ -1,38 +1,36 @@
 package zpt.dsaVis;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import zpt.dsaVis.algorithms.BubbleSort;
-import zpt.dsaVis.algorithms.MergeSort;
-import zpt.dsaVis.algorithms.SelectionSort;
-import zpt.dsaVis.algorithms.insertionSort;
+import zpt.dsaVis.algorithms.Sorting.*;
+import zpt.dsaVis.algorithms.searching.LinearSearch;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 
 @Controller
 public class mainController {
-    Map<String, List<algorithm>> high;
-    Map<String, SortingAlgorithm> objectList;
+    Map<String, List<algorithmDetail>> high;
+    Map<String, Algorithm> objectList;
 
         mainController() {
             high = Map.of(
                 "Sorting", List.of(
-                        new algorithm("BubbleSort","/algo/BubbleSort"),
-                        new algorithm("QuickSort","/algo/QuickSort"),
-                        new algorithm("InsertionSort","/algo/InsertionSort"),
-                        new algorithm("SelectionSort","/algo/SelectionSort"),
-                        new algorithm("MergeSort","/algo/MergeSort"),
-                        new algorithm("RadixSort","/algo/RadixSort")
+                        new algorithmDetail("BubbleSort","/algo/BubbleSort"),
+                        new algorithmDetail("QuickSort","/algo/QuickSort"),
+                        new algorithmDetail("InsertionSort","/algo/InsertionSort"),
+                        new algorithmDetail("SelectionSort","/algo/SelectionSort"),
+                        new algorithmDetail("MergeSort","/algo/MergeSort"),
+                        new algorithmDetail("RadixSort","/algo/RadixSort")
                 ),
                 "Searching", List.of(
-                        new algorithm("LinearSearch","/algo/LinearSearch"),
-                        new algorithm("BinarySearch","/algo/BinarySearch")
+                        new algorithmDetail("LinearSearch","/algo/LinearSearch"),
+                        new algorithmDetail("BinarySearch","/algo/BinarySearch")
                 )
             );
 
@@ -40,7 +38,9 @@ public class mainController {
                     "BubbleSort", new BubbleSort(),
                     "InsertionSort", new insertionSort(),
                     "MergeSort", new MergeSort(),
-                    "SelectionSort", new SelectionSort()
+                    "QuickSort", new QuickSort(),
+                    "SelectionSort", new SelectionSort(),
+                    "LinearSearch", new LinearSearch()
             );
 
         }
@@ -74,13 +74,15 @@ public class mainController {
     ) {
 
         int[] arrayToSort = {5, 3, 8, 4, 2}; // Example array
-        SortingAlgorithm sorter = objectList.get(projectKey);
-        sorter.sort(arrayToSort);
+        Algorithm sorter = objectList.get(projectKey);
+        sorter.implementAlgorithm(arrayToSort);
         m.addAttribute("steps", sorter.getSteps());
-
+        Collection<String> arr = new ArrayList<>();
+        List<String> arr1;
         m.addAttribute("title",projectKey);
         Object obj = objectList.get(projectKey);
         m.addAttribute("chosen",obj);
         return "mainFunction";
+
     }
 }

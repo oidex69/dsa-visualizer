@@ -1,4 +1,4 @@
-package zpt.dsaVis.algorithms;
+package zpt.dsaVis.algorithms.Sorting;
 
 import zpt.dsaVis.SortingAlgorithm;
 
@@ -10,7 +10,7 @@ public class BubbleSort implements SortingAlgorithm {
     private List<sortStep> steps = new ArrayList<>();
 
     @Override
-    public void sort(int[] arr) {
+    public void implementAlgorithm(int[] arr) {
         steps.clear(); // important if reused
 
         int n = arr.length;

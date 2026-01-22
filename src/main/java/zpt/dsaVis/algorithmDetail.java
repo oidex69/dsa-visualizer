@@ -1,10 +1,10 @@
 package zpt.dsaVis;
 
-public class algorithm {
+public class algorithmDetail {
     private String algorithmName;
     private String link;
 
-    public algorithm(String algorithmName, String link) {
+    public algorithmDetail(String algorithmName, String link) {
         this.algorithmName = algorithmName;
         this.link = link;
     }

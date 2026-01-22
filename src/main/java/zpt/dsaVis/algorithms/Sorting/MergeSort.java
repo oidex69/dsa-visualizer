@@ -1,4 +1,4 @@
-package zpt.dsaVis.algorithms;
+package zpt.dsaVis.algorithms.Sorting;
 
 import zpt.dsaVis.SortingAlgorithm;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class MergeSort implements SortingAlgorithm {
     private List<Integer> finalized = new ArrayList<>(); // Tracks fully merged indices
 
     @Override
-    public void sort(int[] arr) {
+    public void implementAlgorithm(int[] arr) {
         step.clear();
         finalized.clear();
         mergeSort(arr, 0, arr.length - 1);
@@ -103,16 +103,16 @@ public class MergeSort implements SortingAlgorithm {
         return step;
     }
 
-    // Test main
-    public static void main(String[] args) {
-        int[] arr = {5, 3, 8, 4, 2};
-        MergeSort sorter = new MergeSort();
-        sorter.sort(arr);
-
-        int count = 1;
-        for (mergeSortStep s : sorter.getSteps()) {
-            System.out.println("Step " + (count++) + ": " + Arrays.toString(s.getAfterArray())
-                    + " Sorted indices: " + s.getSortedIndices());
-        }
-    }
+//    // Test main
+//    public static void main(String[] args) {
+//        int[] arr = {5, 3, 8, 4, 2};
+//        MergeSort sorter = new MergeSort();
+//        sorter.sort(arr);
+//
+//        int count = 1;
+//        for (mergeSortStep s : sorter.getSteps()) {
+//            System.out.println("Step " + (count++) + ": " + Arrays.toString(s.getAfterArray())
+//                    + " Sorted indices: " + s.getSortedIndices());
+//        }
+//    }
 }

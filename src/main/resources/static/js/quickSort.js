@@ -1,11 +1,7 @@
 const container = document.getElementById('array-container');
-
 let currentIndex = 0;
-let interval = null;
+let interval;
 
-/* =========================
-   RENDER QUICK SORT STEP
-   ========================= */
 function renderQuickSortStep(step) {
     const arr = step.afterArray;
     container.innerHTML = '';
@@ -17,7 +13,7 @@ function renderQuickSortStep(step) {
         div.className = 'array-element';
         div.textContent = num;
 
-        // Active partition range
+        // Active partition (low–high)
         if (idx >= step.low && idx <= step.high) {
             div.classList.add('active-range');
         }
@@ -27,16 +23,15 @@ function renderQuickSortStep(step) {
             div.classList.add('pivot');
         }
 
-        // Compared / swapped elements
+        // Compared / swapped indices
         if (idx === step.indexA) {
             div.classList.add('current-a');
         }
-
         if (idx === step.indexB) {
             div.classList.add('current-b');
         }
 
-        // Finalized (sorted) indices
+        // Finalized elements
         if (sorted.includes(idx)) {
             div.classList.add('sorted');
         }
@@ -45,24 +40,24 @@ function renderQuickSortStep(step) {
     });
 }
 
-/* =========================
-   STEP CONTROLS
-   ========================= */
+
 async function playStep() {
     if (currentIndex >= steps.length) return;
+    const step = steps[currentIndex];
 
-    renderQuickSortStep(steps[currentIndex]);
-    currentIndex++;
-
+    // Render current quick sort step
+    renderQuickSortStep(step);
     await new Promise(r => setTimeout(r, 400));
+
+    currentIndex++;
 }
 
 async function playStepReverse() {
     if (currentIndex <= 0) return;
-
     currentIndex--;
-    renderQuickSortStep(steps[currentIndex]);
+    const step = steps[currentIndex];
 
+    renderQuickSortStep(step);
     await new Promise(r => setTimeout(r, 400));
 }
 
@@ -74,43 +69,31 @@ function prevStep() {
     playStepReverse();
 }
 
-/* =========================
-   AUTO PLAY
-   ========================= */
 async function autoPlay() {
     const autoBtn = document.getElementById('autoBtn');
-
     if (interval) {
         clearInterval(interval);
         interval = null;
-        autoBtn.textContent = 'Auto';
-        return;
+        autoBtn.textContent = "Auto";
+    } else {
+        autoBtn.textContent = "Stop";
+        interval = setInterval(async () => {
+            if (currentIndex >= steps.length) {
+                clearInterval(interval);
+                interval = null;
+                autoBtn.textContent = "Auto";
+            } else {
+                await playStep();
+            }
+        }, 1000);
     }
-
-    autoBtn.textContent = 'Stop';
-
-    interval = setInterval(async () => {
-        if (currentIndex >= steps.length) {
-            clearInterval(interval);
-            interval = null;
-            autoBtn.textContent = 'Auto';
-            return;
-        }
-
-        await playStep();
-    }, 700);
 }
 
-/* =========================
-   BUTTON HOOKS
-   ========================= */
+// Attach buttons
 document.getElementById('nextBtn').addEventListener('click', nextStep);
 document.getElementById('prevBtn').addEventListener('click', prevStep);
 document.getElementById('autoBtn').addEventListener('click', autoPlay);
 
-/* =========================
-   INITIAL RENDER
-   ========================= */
-if (steps && steps.length > 0) {
+// Initial render
+if (steps && steps.length > 0)
     renderQuickSortStep(steps[0]);
-}

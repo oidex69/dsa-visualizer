@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title th:text="${title}">Bubble Sort Visualization</title>
     <style>
+        /* =========================
+           BASE ARRAY ELEMENT
+           ========================= */
         .array-element {
             width: 40px;
             height: 40px;
@@ -12,34 +15,80 @@
             text-align: center;
             line-height: 40px;
             border: 1px solid black;
+            background-color: #eee;
         }
 
-        .current { background-color: yellow; }       /* currently comparing */
-        .sorted { background-color: green; }        /* fixed */
-        .current-min { background-color: orange; }  /* current smallest */
+        /* =========================
+           GENERIC STATES (EXISTING)
+           ========================= */
+        .current {
+            background-color: yellow;      /* currently comparing */
+        }
 
+        .sorted {
+            background-color: green;       /* fixed */
+            color: white;
+        }
 
-        /* Left subarray highlight */
+        .current-min {
+            background-color: orange;      /* selection sort min */
+        }
+
+        /* =========================
+           MERGE SORT (EXISTING)
+           ========================= */
         .left-subarray {
-            background-color: #add8e6; /* light blue */
+            background-color: #add8e6;     /* light blue */
         }
 
-        /* Right subarray highlight */
         .right-subarray {
-            background-color: #f4a460; /* sandy brown */
+            background-color: #f4a460;     /* sandy brown */
         }
 
-        /* Currently comparing elements */
         .current-left {
-            background-color: #00ff00; /* green */
+            background-color: #00ff00;     /* green */
             border: 2px solid #008000;
         }
 
         .current-right {
-            background-color: #ff0000; /* red */
+            background-color: #ff0000;     /* red */
             border: 2px solid #800000;
         }
 
+        /* =========================
+           QUICK SORT (NEW)
+           ========================= */
+
+        /* Active partition range */
+        .active-range {
+            border: 2px dashed #999;
+        }
+
+        /* Pivot element */
+        .pivot {
+            background-color: #800080;     /* purple */
+            color: white;
+        }
+
+        /* Compared / swapped indices */
+        .current-a {
+            background-color: #ffd700;     /* gold */
+        }
+
+        .current-b {
+            background-color: #ff8c00;     /* dark orange */
+        }
+
+        /* =========================
+           OPTIONAL VISUAL POLISH
+           ========================= */
+        .active-range:not(.pivot):not(.sorted) {
+            background-color: #f0f0f0;
+        }
+
+        .sorted.pivot {
+            background-color: #006400;     /* dark green */
+        }
     </style>
 </head>
 <body>
@@ -61,8 +110,13 @@
         scriptFile = '/js/selectionSort.js';
     } else if (title === 'BubbleSort' || title === 'InsertionSort') {
         scriptFile = '/js/bubbleAndInsertion.js';
-    } else if(title === 'MergeSort')
-        scriptFile ='/js/mergeSort.js'
+    } else if(title === 'MergeSort') {
+        scriptFile ='/js/mergeSort.js';
+    } else if (title === 'QuickSort'){
+        scriptFile = '/js/quickSort.js';
+    } else if ( title === 'LinearSearch') {
+        scriptFile = '/js/LinearSearch.js';
+    }
 
     if (scriptFile) {
         const script = document.createElement('script');

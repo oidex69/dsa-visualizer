@@ -1,8 +1,7 @@
-package zpt.dsaVis.algorithms;
+package zpt.dsaVis.algorithms.Sorting;
 
 import zpt.dsaVis.SortingAlgorithm;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SelectionSort implements SortingAlgorithm {
@@ -10,7 +9,7 @@ public class SelectionSort implements SortingAlgorithm {
     private List<selectionSortStep> step = new ArrayList<>();
 
     @Override
-    public void sort(int[] arr) {
+    public void implementAlgorithm(int[] arr) {
         step.clear();
         List<Integer> sortedIndices = new ArrayList<>();
 

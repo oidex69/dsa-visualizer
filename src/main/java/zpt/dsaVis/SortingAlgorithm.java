@@ -2,8 +2,9 @@ package zpt.dsaVis;
 
 import java.util.List;
 
-public interface SortingAlgorithm {
-    void sort(int[] arr);
+public interface SortingAlgorithm extends Algorithm {
+
+//    void sort(int[] arr);
 
     List<?> getSteps();
 }
