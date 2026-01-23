@@ -2,21 +2,30 @@
 const container = document.getElementById('array-container');
 let currentIndex = 0;
 let interval;
+let barInitDone = false;
 
 function renderStep(step, useAfter = false) {
     const arr = useAfter ? step.afterArray : step.beforeArray;
+
     const current = [step.index1, step.index2].filter(i => i >= 0);
     const sorted = step.sortedIndices || [];
 
-    container.innerHTML = '';
-    arr.forEach((num, idx) => {
-        const div = document.createElement('div');
-        div.className = 'array-element';
-        div.textContent = num;
-        if (current.includes(idx)) div.classList.add('current');
-        if (sorted.includes(idx)) div.classList.add('sorted');
-        container.appendChild(div);
-    });
+    if (!barInitDone) {
+        BarAnimator.init(arr);
+        barInitDone = true;
+    } else {
+        BarAnimator.moveToArray(arr);
+    }
+
+    BarAnimator.clearStateClasses();
+
+    for (let i = 0; i < arr.length; i++) {
+        const bar = BarAnimator.getBarAtIndex(i);
+        if (!bar) continue;
+
+        if (current.includes(i)) bar.classList.add("current");
+        if (sorted.includes(i)) bar.classList.add("sorted");
+    }
 }
 
 async function playStep() {
