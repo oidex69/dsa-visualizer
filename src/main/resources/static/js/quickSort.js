@@ -1,44 +1,42 @@
 const container = document.getElementById('array-container');
 let currentIndex = 0;
 let interval;
+let barInitDone = false;
 
-function renderQuickSortStep(step) {
-    const arr = step.afterArray;
-    container.innerHTML = '';
+
+function renderQuickSortStep(step, useAfter = false) {
+    const arr = useAfter ? step.afterArray : step.beforeArray;
+
+    if (!barInitDone) {
+        BarAnimator.init(arr);
+        barInitDone = true;
+    } else {
+        BarAnimator.moveToArray(arr);
+    }
+
+    BarAnimator.clearStateClasses();
 
     const sorted = step.sortedIndices || [];
 
-    arr.forEach((num, idx) => {
-        const div = document.createElement('div');
-        div.className = 'array-element';
-        div.textContent = num;
+    for (let i = 0; i < arr.length; i++) {
+        const bar = BarAnimator.getBarAtIndex(i);
+        if (!bar) continue;
 
-        // Active partition (low–high)
-        if (idx >= step.low && idx <= step.high) {
-            div.classList.add('active-range');
-        }
+        // active partition range
+        if (i >= step.low && i <= step.high) bar.classList.add("active-range");
 
-        // Pivot element
-        if (idx === step.pivotIndex) {
-            div.classList.add('pivot');
-        }
+        // pivot
+        if (i === step.pivotIndex) bar.classList.add("pivot");
 
-        // Compared / swapped indices
-        if (idx === step.indexA) {
-            div.classList.add('current-a');
-        }
-        if (idx === step.indexB) {
-            div.classList.add('current-b');
-        }
+        // compared indices
+        if (i === step.indexA) bar.classList.add("current-a");
+        if (i === step.indexB) bar.classList.add("current-b");
 
-        // Finalized elements
-        if (sorted.includes(idx)) {
-            div.classList.add('sorted');
-        }
-
-        container.appendChild(div);
-    });
+        // sorted indices
+        if (sorted.includes(i)) bar.classList.add("sorted");
+    }
 }
+
 
 
 async function playStep() {
