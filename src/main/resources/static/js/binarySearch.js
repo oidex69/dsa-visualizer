@@ -55,18 +55,6 @@ function renderBinarySearchStep(step) {
       }
     }
 
-    // mid highlight (yellow while checking, green if found)
-    if (i === mid) {
-      if (
-        step.found === true ||
-        step.isFound === true ||
-        step.foundIndex === mid
-      ) {
-        bar.classList.add("sorted");
-      } else {
-        bar.classList.add("current");
-      }
-    }
   }
 }
 
