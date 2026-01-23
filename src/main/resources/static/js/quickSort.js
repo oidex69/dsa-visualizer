@@ -44,7 +44,7 @@ async function playStep() {
     const step = steps[currentIndex];
 
     // Render current quick sort step
-    renderQuickSortStep(step);
+    renderQuickSortStep(step, true);
     await new Promise(r => setTimeout(r, 400));
 
     currentIndex++;
@@ -55,7 +55,7 @@ async function playStepReverse() {
     currentIndex--;
     const step = steps[currentIndex];
 
-    renderQuickSortStep(step);
+    renderQuickSortStep(step, true);
     await new Promise(r => setTimeout(r, 400));
 }
 
@@ -94,4 +94,4 @@ document.getElementById('autoBtn').addEventListener('click', autoPlay);
 
 // Initial render
 if (steps && steps.length > 0)
-    renderQuickSortStep(steps[0]);
+    renderQuickSortStep(steps[0],true);

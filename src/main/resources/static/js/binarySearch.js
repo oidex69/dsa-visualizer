@@ -15,7 +15,7 @@ function showTargetMarker(bar, value) {
 
 function renderBinarySearchStep(step) {
   const arr = step.beforeArray || step.array || step.arr;
-  const target = step.target ?? step.key ?? step.searchValue;
+  const target = 5;
 
   if (!barInitDone) {
     BarAnimator.init(arr);
