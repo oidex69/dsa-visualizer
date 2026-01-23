@@ -20,7 +20,6 @@
   bottom: 12px;             /* sit on baseline */
   width: var(--barW, 28px);
   border-radius: 8px 8px 0 0;
-  --barW: 16px;
 
   display: flex;
   align-items: flex-end;
