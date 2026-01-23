@@ -1,27 +1,36 @@
 const container = document.getElementById('array-container');
 let currentIndex = 0;
 let interval;
+let barInitDone = false;
+
 
 function renderLinearSearchStep(step) {
-    const arr = step.beforeArray;
-    container.innerHTML = '';
+    const arr = step.beforeArray || step.array || step.arr; // fallback safe
 
-    arr.forEach((num, idx) => {
-        const div = document.createElement('div');
-        div.className = 'array-element';
-        div.textContent = num;
+    if (!barInitDone) {
+        BarAnimator.init(arr);
+        barInitDone = true;
+    }
 
-        // Current comparing
-        if (idx === step.currentIndex) div.classList.add('current');
+    BarAnimator.clearStateClasses();
 
-        // Checked indices
-        if (step.checkedIndices.includes(idx)) div.classList.add('current-min');
+    for (let i = 0; i < arr.length; i++) {
+        const bar = BarAnimator.getBarAtIndex(i);
+        if (!bar) continue;
 
-        // Found target
-        if (step.found && idx === step.currentIndex) div.classList.add('sorted');
+        // highlight checked index (common step field names)
+        if (i === step.currentIndex || i === step.index || i === step.i) {
+            bar.classList.add("current");
+        }
 
-        container.appendChild(div);
-    });
+        // found index (if present)
+        if (step.foundIndex != null && i === step.foundIndex) {
+            bar.classList.add("sorted");
+        }
+        if (step.found === true && (i === step.currentIndex || i === step.index || i === step.i)) {
+            bar.classList.add("sorted");
+        }
+    }
 }
 
 async function playStep() {
