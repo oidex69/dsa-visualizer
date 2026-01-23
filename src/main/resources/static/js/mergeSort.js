@@ -48,7 +48,7 @@ function renderStep(step, useAfter = false) {
 async function playStep() {
     if (currentIndex >= steps.length) return;
 
-    renderStep(steps[currentIndex]);
+    renderStep(steps[currentIndex],true);
     currentIndex++;
 
     await new Promise(r => setTimeout(r, 400));
@@ -58,7 +58,7 @@ async function playStepReverse() {
     if (currentIndex <= 0) return;
 
     currentIndex--;
-    renderStep(steps[currentIndex]);
+    renderStep(steps[currentIndex],true);
 
     await new Promise(r => setTimeout(r, 400));
 }
@@ -109,5 +109,5 @@ document.getElementById('autoBtn').addEventListener('click', autoPlay);
    INITIAL RENDER
    ========================= */
 if (steps && steps.length > 0) {
-    renderStep(steps[0]);
+    renderStep(steps[0],true);
 }
