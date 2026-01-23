@@ -1,32 +1,45 @@
 const container = document.getElementById('array-container');
 let currentIndex = 0;
 let interval;
+let barInitDone = false;
+
 
 function renderBinarySearchStep(step) {
-    const arr = step.beforeArray;
-    container.innerHTML = '';
+      const arr = step.beforeArray || step.array || step.arr;
 
-    arr.forEach((num, idx) => {
-        const div = document.createElement('div');
-        div.className = 'array-element';
-        div.textContent = num;
+    if (!barInitDone) {
+        BarAnimator.init(arr);
+        barInitDone = true;
+    }
 
-        // Elements outside current search range (greyed out)
-        if (idx < step.low || idx > step.high) {
-            div.style.backgroundColor = '#ccc';
+    BarAnimator.clearStateClasses();
+
+    const low  = step.low;
+    const high = step.high;
+    const mid  = step.mid;
+
+    for (let i = 0; i < arr.length; i++) {
+        const bar = BarAnimator.getBarAtIndex(i);
+        if (!bar) continue;
+
+        // outside active range = grey (same behavior you had before)
+        if (low != null && high != null && (i < low || i > high)) {
+            bar.style.backgroundColor = "#ccc";
         }
 
-        // Current mid element
-        if (idx === step.mid) {
-            div.classList.add(step.found ? 'sorted' : 'current'); // green if found, yellow otherwise
+        // mark low/high borders
+        if (i === low)  bar.style.border = "2px solid blue";
+        if (i === high) bar.style.border = "2px solid red";
+
+        // mid highlight (yellow while checking, green if found)
+        if (i === mid) {
+            if (step.found === true || step.isFound === true || step.foundIndex === mid) {
+                bar.classList.add("sorted");
+            } else {
+                bar.classList.add("current");
+            }
         }
-
-        // Low and High borders
-        if (idx === step.low) div.style.border = '2px solid blue';
-        if (idx === step.high) div.style.border = '2px solid red';
-
-        container.appendChild(div);
-    });
+    }
 }
 
 // =========================
