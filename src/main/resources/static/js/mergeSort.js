@@ -2,48 +2,45 @@ const container = document.getElementById('array-container');
 
 let currentIndex = 0;
 let interval = null;
+let barInitDone = false;
+
 
 /* =========================
-   RENDER QUICK SORT STEP
+   RENDER MERGE SORT STEP
    ========================= */
-function renderQuickSortStep(step) {
-    const arr = step.afterArray;
-    container.innerHTML = '';
+function renderStep(step, useAfter = false) {
+    const arr = useAfter ? step.afterArray : step.beforeArray;
 
-    const sorted = step.sortedIndices || [];
+    if (!barInitDone) {
+        BarAnimator.init(arr);
+        barInitDone = true;
+    } else {
+        BarAnimator.moveToArray(arr);
+    }
 
-    arr.forEach((num, idx) => {
-        const div = document.createElement('div');
-        div.className = 'array-element';
-        div.textContent = num;
+    BarAnimator.clearStateClasses();
 
-        // Active partition range
-        if (idx >= step.low && idx <= step.high) {
-            div.classList.add('active-range');
+    // These exist in your merge sort styling/classes:
+    // left-subarray, right-subarray, current-left, current-right
+    // We'll apply them if step provides indices/ranges.
+    for (let i = 0; i < arr.length; i++) {
+        const bar = BarAnimator.getBarAtIndex(i);
+        if (!bar) continue;
+
+        // optional ranges (depends on your step object)
+        if (step.leftStart != null && step.leftEnd != null && i >= step.leftStart && i <= step.leftEnd) {
+            bar.classList.add("left-subarray");
+        }
+        if (step.rightStart != null && step.rightEnd != null && i >= step.rightStart && i <= step.rightEnd) {
+            bar.classList.add("right-subarray");
         }
 
-        // Pivot element
-        if (idx === step.pivotIndex) {
-            div.classList.add('pivot');
-        }
-
-        // Compared / swapped elements
-        if (idx === step.indexA) {
-            div.classList.add('current-a');
-        }
-
-        if (idx === step.indexB) {
-            div.classList.add('current-b');
-        }
-
-        // Finalized (sorted) indices
-        if (sorted.includes(idx)) {
-            div.classList.add('sorted');
-        }
-
-        container.appendChild(div);
-    });
+        // optional pointers (depends on your step object)
+        if (i === step.currentLeftIndex) bar.classList.add("current-left");
+        if (i === step.currentRightIndex) bar.classList.add("current-right");
+    }
 }
+
 
 /* =========================
    STEP CONTROLS
@@ -51,7 +48,7 @@ function renderQuickSortStep(step) {
 async function playStep() {
     if (currentIndex >= steps.length) return;
 
-    renderQuickSortStep(steps[currentIndex]);
+    renderStep(steps[currentIndex]);
     currentIndex++;
 
     await new Promise(r => setTimeout(r, 400));
@@ -61,7 +58,7 @@ async function playStepReverse() {
     if (currentIndex <= 0) return;
 
     currentIndex--;
-    renderQuickSortStep(steps[currentIndex]);
+    renderStep(steps[currentIndex]);
 
     await new Promise(r => setTimeout(r, 400));
 }
@@ -112,5 +109,5 @@ document.getElementById('autoBtn').addEventListener('click', autoPlay);
    INITIAL RENDER
    ========================= */
 if (steps && steps.length > 0) {
-    renderQuickSortStep(steps[0]);
+    renderStep(steps[0]);
 }
