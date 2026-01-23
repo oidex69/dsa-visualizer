@@ -1,97 +1,100 @@
-const container = document.getElementById('array-container');
+const container = document.getElementById("array-container");
 let currentIndex = 0;
 let interval;
 let barInitDone = false;
 
-
 function renderQuickSortStep(step, useAfter = false) {
-    const arr = useAfter ? step.afterArray : step.beforeArray;
+  const arr = useAfter ? step.afterArray : step.beforeArray;
 
-    if (!barInitDone) {
-        BarAnimator.init(arr);
-        barInitDone = true;
-    } else {
-        BarAnimator.moveToArray(arr);
-    }
+  if (!barInitDone) {
+    BarAnimator.init(arr);
+    barInitDone = true;
+  } else {
+    BarAnimator.moveToArray(arr);
+  }
 
-    BarAnimator.clearStateClasses();
+  BarAnimator.clearStateClasses();
 
-    const sorted = step.sortedIndices || [];
+  const sorted = step.sortedIndices || [];
 
-    for (let i = 0; i < arr.length; i++) {
-        const bar = BarAnimator.getBarAtIndex(i);
-        if (!bar) continue;
+  // ✅ accept alternate field names safely
+  const low = step.low ?? step.left ?? step.l;
+  const high = step.high ?? step.right ?? step.h;
 
-        // active partition range
-        if (i >= step.low && i <= step.high) bar.classList.add("active-range");
+  const pivotIndex = step.pivotIndex ?? step.pivot ?? step.pivotPos;
 
-        // pivot
-        if (i === step.pivotIndex) bar.classList.add("pivot");
+  const indexA = step.indexA ?? step.i ?? step.index1;
+  const indexB = step.indexB ?? step.j ?? step.index2;
 
-        // compared indices
-        if (i === step.indexA) bar.classList.add("current-a");
-        if (i === step.indexB) bar.classList.add("current-b");
+  for (let i = 0; i < arr.length; i++) {
+    const bar = BarAnimator.getBarAtIndex(i);
+    if (!bar) continue;
 
-        // sorted indices
-        if (sorted.includes(i)) bar.classList.add("sorted");
-    }
+    // Reset any leftover inline styles (important if you used them elsewhere)
+    bar.style.border = "";
+    bar.style.backgroundColor = "";
+
+    if (low != null && high != null && i >= low && i <= high)
+      bar.classList.add("active-range");
+    if (pivotIndex != null && i === pivotIndex) bar.classList.add("pivot");
+    if (indexA != null && i === indexA) bar.classList.add("current-a");
+    if (indexB != null && i === indexB) bar.classList.add("current-b");
+    if (sorted.includes(i)) bar.classList.add("sorted");
+  }
 }
 
-
-
 async function playStep() {
-    if (currentIndex >= steps.length) return;
-    const step = steps[currentIndex];
+  if (currentIndex >= steps.length) return;
+  const step = steps[currentIndex];
 
-    // Render current quick sort step
-    renderQuickSortStep(step, true);
-    await new Promise(r => setTimeout(r, 400));
+  // Render current quick sort step
+  renderQuickSortStep(step, true);
+  await new Promise((r) => setTimeout(r, 400));
 
-    currentIndex++;
+  currentIndex++;
 }
 
 async function playStepReverse() {
-    if (currentIndex <= 0) return;
-    currentIndex--;
-    const step = steps[currentIndex];
+  if (currentIndex <= 0) return;
+  currentIndex--;
+  const step = steps[currentIndex];
 
-    renderQuickSortStep(step, true);
-    await new Promise(r => setTimeout(r, 400));
+  renderQuickSortStep(step, true);
+  await new Promise((r) => setTimeout(r, 400));
 }
 
 function nextStep() {
-    playStep();
+  playStep();
 }
 
 function prevStep() {
-    playStepReverse();
+  playStepReverse();
 }
 
 async function autoPlay() {
-    const autoBtn = document.getElementById('autoBtn');
-    if (interval) {
+  const autoBtn = document.getElementById("autoBtn");
+  if (interval) {
+    clearInterval(interval);
+    interval = null;
+    autoBtn.textContent = "Auto";
+  } else {
+    autoBtn.textContent = "Stop";
+    interval = setInterval(async () => {
+      if (currentIndex >= steps.length) {
         clearInterval(interval);
         interval = null;
         autoBtn.textContent = "Auto";
-    } else {
-        autoBtn.textContent = "Stop";
-        interval = setInterval(async () => {
-            if (currentIndex >= steps.length) {
-                clearInterval(interval);
-                interval = null;
-                autoBtn.textContent = "Auto";
-            } else {
-                await playStep();
-            }
-        }, 1000);
-    }
+      } else {
+        await playStep();
+      }
+    }, 1000);
+  }
 }
 
 // Attach buttons
-document.getElementById('nextBtn').addEventListener('click', nextStep);
-document.getElementById('prevBtn').addEventListener('click', prevStep);
-document.getElementById('autoBtn').addEventListener('click', autoPlay);
+document.getElementById("nextBtn").addEventListener("click", nextStep);
+document.getElementById("prevBtn").addEventListener("click", prevStep);
+document.getElementById("autoBtn").addEventListener("click", autoPlay);
 
 // Initial render
-if (steps && steps.length > 0)
-    renderQuickSortStep(steps[0],true);
+if (steps && steps.length > 0) renderQuickSortStep(steps[0], true);
