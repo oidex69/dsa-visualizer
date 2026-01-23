@@ -12,7 +12,7 @@
     bars: [],
 
     // Default bar width (pixels). Will be recalculated dynamically.
-    barW: 28,
+    barW: 18,
 
     // Horizontal gap between bars (pixels).
     gap: 8,
