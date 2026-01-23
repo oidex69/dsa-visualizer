@@ -109,12 +109,25 @@
         scriptFile = "/js/binarySearch.js";
     }
 
-    if (scriptFile) {
-        const script = document.createElement('script');
-        script.src = scriptFile;
-        script.defer = true; // optional, to wait until HTML is parsed
-        document.body.appendChild(script);
+    function loadScript(src, cb) {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => cb && cb();
+    s.onerror = () => console.error("Failed to load:", src);
+    document.body.appendChild(s);
+}
+
+if (scriptFile) {
+    // Ensure BarAnimator exists before loading algorithm script
+    if (typeof window.BarAnimator === "undefined") {
+        loadScript("/js/core/barAnimator.js", () => {
+            loadScript(scriptFile);
+        });
+    } else {
+        loadScript(scriptFile);
     }
+}
+
 </script>
 </body>
 </html>
