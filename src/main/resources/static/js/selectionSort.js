@@ -2,29 +2,36 @@
 const container = document.getElementById('array-container');
 let currentIndex = 0;
 let interval;
+let barInitDone = false; //bar initialization
 
 function renderStep(step, useAfter = false) {
     const arr = useAfter ? step.afterArray : step.beforeArray;
+
     const current = [step.index1, step.index2].filter(i => i >= 0);
     const currentMinIndex = step.currentMinIndex >= 0 ? [step.currentMinIndex] : [];
     const sorted = step.sortedIndices || [];
-    console.log(currentMinIndex);
-    container.innerHTML = '';
-    arr.forEach((num, idx) => {
-        const div = document.createElement('div');
-        div.className = 'array-element';
-        div.textContent = num;
 
-        if (current.includes(idx))
-            div.classList.add('current');       // comparing
-        if (currentMinIndex.includes(idx))
-            div.classList.add('current-min'); // highlight min
-        if (sorted.includes(idx))
-            div.classList.add('sorted');         // sorted
+    // init once, then animate
+    if (!barInitDone) {
+        BarAnimator.init(arr);
+        barInitDone = true;
+    } else {
+        BarAnimator.moveToArray(arr);
+    }
 
-        container.appendChild(div);
-    });
+    // clear + reapply highlight classes
+    BarAnimator.clearStateClasses();
+
+    for (let idx = 0; idx < arr.length; idx++) {
+        const bar = BarAnimator.getBarAtIndex(idx);
+        if (!bar) continue;
+
+        if (current.includes(idx)) bar.classList.add('current');
+        if (currentMinIndex.includes(idx)) bar.classList.add('current-min');
+        if (sorted.includes(idx)) bar.classList.add('sorted');
+    }
 }
+
 
 async function playStep() {
     if (currentIndex >= steps.length) return;

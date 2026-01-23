@@ -1,3 +1,49 @@
 #h {
     color: brown;
 }
+/* =========================
+   BAR GRAPH VISUALIZER CSS
+   ========================= */
+
+/* Chart area */
+#array-container{
+  position: relative;
+  height: 320px;            /* you can increase later */
+  padding: 12px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Each number becomes a BAR */
+.array-element{
+  position: absolute;       /* IMPORTANT: allows smooth shifting */
+  bottom: 12px;             /* sit on baseline */
+  width: var(--barW, 28px);
+  border-radius: 8px 8px 0 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 12px;
+  padding-bottom: 6px;
+
+  /*  Smooth animation */
+  transition:
+    transform 420ms cubic-bezier(.22,.61,.36,1),
+    height    420ms cubic-bezier(.22,.61,.36,1),
+    background-color 180ms linear,
+    box-shadow 180ms linear;
+
+  will-change: transform, height;
+}
+
+/* Optional emphasis for your existing highlight classes */
+.array-element.current,
+.array-element.current-a,
+.array-element.current-b,
+.array-element.pivot,
+.array-element.sorted,
+.array-element.current-min,
+.array-element.active-range{
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+}
