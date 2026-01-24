@@ -1,6 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Visualizer - AlgoViz</title>
+    
+    <!-- Header/Footer CSS -->
+    <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
+    
+    <!-- Info Division CSS -->
+    <!-- <link rel="stylesheet" th:href="@{/css/infoDiv.css}"> -->
+    
+    <!-- Any other page-specific CSS -->
+    <link rel="stylesheet" th:href="@{/css/homepage.css}">
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="header :: header"></div>
+    
+    <!-- Main Content -->
+    <main>
+        <div th:replace="infoDiv :: infoDivision"></div>
+    </main>
+    
+    <!-- Footer -->
+    <div th:replace="footer :: footer"></div>
+
+    <!-- JavaScript -->
+    <script th:src="@{/core/headerFooter.js}"></script>
+    <script th:src="@{/core/infoDivAnimations.js}"></script>
+</body>
+
+<!-- <head>
     <title>Title</title>
     <link rel="stylesheet" th:href="${homePageCss}">
 </head>
@@ -11,5 +42,6 @@
         <p th:text="${p.image}"></p>
         <p th:text="${p.role}"></p>
     </div>
-</body>
+</body> -->
+
 </html>

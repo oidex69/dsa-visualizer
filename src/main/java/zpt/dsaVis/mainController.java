@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import zpt.dsaVis.algorithms.Sorting.*;
 import zpt.dsaVis.algorithms.searching.BinarySearch;
 import zpt.dsaVis.algorithms.searching.LinearSearch;
@@ -63,11 +65,34 @@ public class mainController {
         return "Homepage";
     }
 
-    @GetMapping("/ronak")
-    public String canvas(Model m) {
-        m.addAttribute("algorithms", high);
+    @GetMapping("/canvas")
+    public String canvas(
+    @RequestParam(value = "type", required = false) String type,Model m) 
+    {
+        Map<String, List<algorithmDetail>> filteredAlgorithms;
+        
+        if (type != null) {
+            String normalizedType = type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase();
+            filteredAlgorithms = high.containsKey(normalizedType) 
+                ? Map.of(normalizedType, high.get(normalizedType))
+                : high;
+        } else {
+            filteredAlgorithms = high;
+        }
+    
+        m.addAttribute("algorithms", filteredAlgorithms);
+        m.addAttribute("headerFooterCss","/css/headerFooter.css");
+        m.addAttribute("infoDivCss","/css/infoDiv.css");
         return "canvas";
     }
+
+    // @GetMapping("/ronak")
+    // public String canvas(Model m) {
+    //     m.addAttribute("algorithms", high);
+    //     m.addAttribute("headerFooterCss","/css/headerFooter.css");
+    //     m.addAttribute("infoDivCss","/css/infoDiv.css");
+    //     return "canvas";
+    // }
 
     @GetMapping("/algo/{projectKey}")
     public String mainFunction(
@@ -86,4 +111,7 @@ public class mainController {
         return "mainFunction";
 
     }
+
+    
+
 }

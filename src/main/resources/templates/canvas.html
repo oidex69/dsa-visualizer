@@ -2,10 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Algorithms Visualization</title>
+    <link rel="stylesheet" th:href="${headerFooterCss}">
+    <link rel="stylesheet" th:href="${infoDivCss}">
 </head>
 <body>
-    <div th:replace="~{infoDiv :: helloworldFragment}"></div>
-    <div th:replace="~{infoDiv :: infoDivision}"></div>
+    <!-- Header -->
+    <header th:insert="~{header :: header}"></header>
+    
+    <!-- Main Content -->
+    <main>
+        <div th:insert="~{infoDiv :: infoDivision}"></div>
+    </main>
+    
+    <!-- Footer -->
+    <footer th:insert="~{footer :: footer}"></footer>
+
+    <script th:src="@{/core/headerFooter.js}"></script>
+
 </body>
 </html>
