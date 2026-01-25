@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algorithm Visualizer - AlgoViz</title>
     
-    <!-- Header/Footer CSS -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
-    
-    <!-- Info Division CSS -->
-    <!-- <link rel="stylesheet" th:href="@{/css/infoDiv.css}"> -->
-    
-    <!-- Any other page-specific CSS -->
     <link rel="stylesheet" th:href="@{/css/homepage.css}">
 </head>
 <body>
@@ -19,29 +14,191 @@
     <div th:replace="header :: header"></div>
     
     <!-- Main Content -->
-    <main>
-        <div th:replace="infoDiv :: infoDivision"></div>
+    <main id="homeMain" class="home-main mt-header">
+        
+        <!-- Hero Section -->
+        <section id="heroSection" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 id="heroTitle" class="hero-title">
+                        <span class="gradient-text">Visualize Algorithms</span>
+                        <span class="gradient-text-subtitle">Step by Step</span>
+                    </h1>
+                    <p id="heroDescription" class="hero-description">
+                        Master data structures and algorithms through interactive visualizations. 
+                        Watch algorithms execute in real-time and understand how they work.
+                    </p>
+                    <div id="heroButtons" class="hero-buttons">
+                        <a th:href="@{/canvas}" class="hero-btn hero-btn-primary">
+                            <span>Get Started</span>
+                            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="#features" class="hero-btn hero-btn-secondary">
+                            <span>Learn More</span>
+                            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Animated Visualization Demo -->
+                <div id="heroVisualization" class="hero-visualization">
+                    <div class="demo-bars">
+                        <div class="demo-bar" data-height="60"></div>
+                        <div class="demo-bar" data-height="90"></div>
+                        <div class="demo-bar" data-height="40"></div>
+                        <div class="demo-bar" data-height="75"></div>
+                        <div class="demo-bar" data-height="50"></div>
+                        <div class="demo-bar" data-height="85"></div>
+                        <div class="demo-bar" data-height="30"></div>
+                    </div>
+                </div>
+            </div> 
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="features-container">
+                <div class="section-header">
+                    <h2 class="section-title">Key Features</h2>
+                    <p class="section-subtitle">Interactive learning made simple</p>
+                </div>
+                <div id="featuresGrid" class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Visual Learning</h3>
+                        <p class="feature-description">
+                            Watch algorithms execute step-by-step with color-coded visualizations that make complex concepts easy to understand.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Interactive Control</h3>
+                        <p class="feature-description">
+                            Control the pace with play, pause, and step-through controls. Input your own data to see how algorithms behave.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Comprehensive Coverage</h3>
+                        <p class="feature-description">
+                            From basic sorting to advanced searching algorithms. Learn time and space complexity for each algorithm.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="section-header">
+                    <h2 class="section-title">Why Algorithm Visualizer?</h2>
+                    <p class="section-subtitle">Understanding algorithms through visualization</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="about-description">
+                            Learning algorithms can be challenging when you only see code or static diagrams. 
+                            Algorithm Visualizer brings algorithms to life by showing you exactly how they work 
+                            step-by-step with interactive visualizations.
+                        </p>
+                        <p class="about-description">
+                            Whether you're a student preparing for technical interviews, a developer learning 
+                            new algorithms, or an educator teaching computer science concepts, visual learning 
+                            helps you understand the logic, time complexity, and space complexity of algorithms 
+                            more intuitively.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="process-section">
+            <div class="process-container">
+                <div class="section-header">
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-subtitle">Simple steps to visualize any algorithm</p>
+                </div>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Choose an Algorithm</h3>
+                            <p class="step-description">
+                                Browse through our collection of sorting and searching algorithms. 
+                                Each algorithm is carefully implemented to show its unique approach.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Watch It Execute</h3>
+                            <p class="step-description">
+                                See the algorithm run step-by-step with color-coded visualizations. 
+                                Each step highlights what the algorithm is comparing, swapping, or processing.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Control the Pace</h3>
+                            <p class="step-description">
+                                Use play, pause, and step controls to go at your own speed. 
+                                Step through each operation to understand the algorithm's logic in detail.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Learn & Master</h3>
+                            <p class="step-description">
+                                Understand time and space complexity, see how different inputs affect 
+                                performance, and master algorithms through visual learning.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-cta">
+                    <a th:href="@{/canvas}" class="process-button">
+                        <span>Start Visualizing</span>
+                        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
     
     <!-- Footer -->
     <div th:replace="footer :: footer"></div>
 
     <!-- JavaScript -->
-    <script th:src="@{/core/headerFooter.js}"></script>
-    <script th:src="@{/core/infoDivAnimations.js}"></script>
+    <script th:src="@{/js/core/headerFooter.js}"></script>
+    <script th:src="@{/js/core/homeAnimations.js}"></script>
 </body>
-
-<!-- <head>
-    <title>Title</title>
-    <link rel="stylesheet" th:href="${homePageCss}">
-</head>
-<body>
-    <p id = "h">THis is css effected</p>
-    <div th:each="p : ${text}">
-        <p th:text="${p.name}"></p>
-        <p th:text="${p.image}"></p>
-        <p th:text="${p.role}"></p>
-    </div>
-</body> -->
-
 </html>

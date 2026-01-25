@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-
 @Controller
 public class mainController {
     Map<String, List<algorithmDetail>> high;
@@ -51,17 +50,16 @@ public class mainController {
 
     @GetMapping("/")
     public String homePage(Model m) {
-        List<data> listOfPeople = new ArrayList<>();
-        listOfPeople.add(
-                new data("ronak","link","front")
-        );
-        listOfPeople.add(
-                new data("prince","link","back")
-        );
+        // List<data> listOfPeople = new ArrayList<>();
+        // listOfPeople.add(
+        //         new data("ronak","link","front")
+        // );
+        // listOfPeople.add(
+        //         new data("prince","link","back")
+        // );
 
-        m.addAttribute("text", listOfPeople);
-        m.addAttribute("homePageCss","/css/homepage.css");
-
+        // m.addAttribute("text", listOfPeople);
+        m.addAttribute("homePageCss","/css/homepage.css"); 
         return "Homepage";
     }
 
@@ -86,14 +84,6 @@ public class mainController {
         return "canvas";
     }
 
-    // @GetMapping("/ronak")
-    // public String canvas(Model m) {
-    //     m.addAttribute("algorithms", high);
-    //     m.addAttribute("headerFooterCss","/css/headerFooter.css");
-    //     m.addAttribute("infoDivCss","/css/infoDiv.css");
-    //     return "canvas";
-    // }
-
     @GetMapping("/algo/{projectKey}")
     public String mainFunction(
             @PathVariable String projectKey,
@@ -111,7 +101,4 @@ public class mainController {
         return "mainFunction";
 
     }
-
-    
-
 }
