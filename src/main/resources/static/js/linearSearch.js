@@ -3,76 +3,52 @@ let currentIndex = 0;
 let interval;
 let barInitDone = false;
 
-function showTargetMarker(bar, value) {
-  // remove existing marker
-  const old = bar.querySelector(".target-marker");
-  if (old) old.remove();
-
-  const marker = document.createElement("div");
-  marker.className = "target-marker";
-  marker.textContent = `Target: ${value}`;
-  bar.appendChild(marker);
-}
-
+// Render a single step
 function renderLinearSearchStep(step) {
-  const arr = step.beforeArray || step.array || step.arr; // fallback safe
-  const target = step.target ?? step.key ?? step.searchValue;
+  const arr = step.beforeArray || step.array || step.arr || [];
 
+  // Initialize bars if first time
   if (!barInitDone) {
-    BarAnimator.init(arr);
+    BarAnimator.init(arr, step.target); // pass target
     barInitDone = true;
   }
 
+  // Clear only current/sorted highlights (do NOT touch target bubble)
   BarAnimator.clearStateClasses();
 
   for (let i = 0; i < arr.length; i++) {
     const bar = BarAnimator.getBarAtIndex(i);
-
-    // show target marker on the currently checked index
-    if (i === step.currentIndex || i === step.index || i === step.i) {
-      showTargetMarker(bar, target);
-    }
-
     if (!bar) continue;
 
-    // highlight checked index (common step field names)
+    // Highlight the current index
     if (i === step.currentIndex || i === step.index || i === step.i) {
       bar.classList.add("current");
     }
 
-    // found index (if present)
-    if (step.foundIndex != null && i === step.foundIndex) {
-      bar.classList.add("sorted");
-    }
-    if (
-      step.found === true &&
-      (i === step.currentIndex || i === step.index || i === step.i)
-    ) {
+    // Mark found index green if found
+    if (step.found === true && arr[i] === step.target) {
       bar.classList.add("sorted");
     }
   }
 }
 
+// STEP CONTROLS
 async function playStep() {
   if (!steps || currentIndex >= steps.length) return;
   renderLinearSearchStep(steps[currentIndex]);
   currentIndex++;
-  await new Promise((r) => setTimeout(r, 400));
+  await new Promise((r) => setTimeout(r, 500));
 }
 
 async function playStepReverse() {
   if (!steps || currentIndex <= 0) return;
   currentIndex--;
   renderLinearSearchStep(steps[currentIndex]);
-  await new Promise((r) => setTimeout(r, 400));
+  await new Promise((r) => setTimeout(r, 500));
 }
 
-function nextStep() {
-  playStep();
-}
-function prevStep() {
-  playStepReverse();
-}
+function nextStep() { playStep(); }
+function prevStep() { playStepReverse(); }
 
 async function autoPlay() {
   const autoBtn = document.getElementById("autoBtn");
@@ -94,8 +70,10 @@ async function autoPlay() {
   }
 }
 
+// Button events
 document.getElementById("nextBtn").addEventListener("click", nextStep);
 document.getElementById("prevBtn").addEventListener("click", prevStep);
 document.getElementById("autoBtn").addEventListener("click", autoPlay);
 
+// Render first step
 if (steps && steps.length > 0) renderLinearSearchStep(steps[0]);

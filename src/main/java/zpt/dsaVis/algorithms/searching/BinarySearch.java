@@ -29,7 +29,8 @@ public class BinarySearch implements SearchAlgorithm {
                     low,
                     high,
                     mid,
-                    found
+                    found,
+                    target
             ));
 
             if (found) {

@@ -3,9 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}">Bubble Sort Visualization</title>
-    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
 
     <style>
+        /* =========================
+           VISUALIZATION PAGE SCOPE
+           ========================= */
+        .viz-page {
+            margin-top: var(--header-height); /* respect fixed header */
+            padding: 2rem;
+            flex: 1; /* allows footer to stay at bottom */
+        }
+
+        .viz-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .viz-page #array-container {
+            position: relative;
+            height: 320px;
+            max-width: 1200px;
+            margin: 2rem auto;
+            border-bottom: 3px solid #333;
+            background: #f9fafb;
+            overflow: hidden;
+        }
+
+        .viz-page .array-element {
+            position: absolute;
+            bottom: 0;
+            width: var(--barW);
+            background-color: steelblue;
+            color: white;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            border-radius: 6px 6px 0 0;
+
+            transition:
+                    height 0.4s ease,
+                    transform 0.4s ease,
+                    background-color 0.3s ease,
+                    box-shadow 0.3s ease;
+        }
+
+        /* =========================
+         ARRAY CONTAINER
+         ========================= */
+        #array-container {
+            position: relative;
+            height: 300px;                 /* chart height */
+            margin: 40px auto;
+            border-bottom: 3px solid #333;
+            background: #f9fafb;
+            overflow: hidden;
+        }
+
+        /* =========================
+           BAR ELEMENTS
+           ========================= */
+        .array-element {
+            position: absolute;
+            bottom: 0;                     /* THIS makes bars vertical */
+            width: var(--barW);            /* controlled by JS */
+            background-color: steelblue;
+            color: white;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            border-radius: 6px 6px 0 0;
+
+            transition:
+                    height 0.4s ease,
+                    transform 0.4s ease,
+                    background-color 0.3s ease,
+                    box-shadow 0.3s ease;
+        }
+
+        /* =========================
+           STATES
+           ========================= */
+        .array-element.current {
+            background-color: #facc15; /* yellow */
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.8);
+        }
+
+        .array-element.sorted {
+            background-color: #22c55e; /* green */
+        }
+
+        .array-element.current.sorted {
+            background-color: #16a34a;
+        }
+
+        /* =========================
+           BINARY SEARCH RANGE
+           ========================= */
+        .array-element.out-of-range {
+            background-color: #d1d5db;
+        }
+
+        /* =========================
+           TARGET MARKER
+           ========================= */
+        .target-marker {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            font-weight: bold;
+            color: #111827;
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #9ca3af;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
 
         /* =========================
            GENERIC STATES (EXISTING)
@@ -81,13 +210,22 @@
     </style>
 </head>
 <body>
-<h1 th:text="${title}"></h1>
+<div th:replace="~{header :: header}"></div>
 
-<div id="array-container"></div>
+<div class="viz-page">
+    <h1 th:text="${title}"></h1>
 
-<button id="prevBtn">Previous</button>
-<button id="nextBtn">Next</button>
-<button id="autoBtn">Auto</button>
+    <div id="array-container"></div>
+
+    <div class="viz-controls">
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+        <button id="autoBtn">Auto</button>
+    </div>
+</div>
+
+<div th:replace="~{footer :: footer}"></div>
+
 <script src="/js/core/barAnimator.js"></script>
 
 <script th:inline="javascript">

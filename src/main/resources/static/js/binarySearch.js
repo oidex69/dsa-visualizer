@@ -1,115 +1,127 @@
-const container = document.getElementById("array-container");
-let currentIndex = 0;
-let interval;
-let barInitDone = false;
+// /js/binarySearch.js
+(function () {
+  let currentIndex = 0;
+  let interval = null;
+  let barInitDone = false;
+  let cachedTarget = null; // 🔥 FIX: store target once
 
-function showTargetMarker(bar, value) {
-  const old = bar.querySelector(".target-marker");
-  if (old) old.remove();
+  function renderBinarySearchStep(step) {
+    const arr = step.beforeArray || step.array || step.arr || [];
 
-  const marker = document.createElement("div");
-  marker.className = "target-marker";
-  marker.textContent = `Target: ${value}`;
-  bar.appendChild(marker);
-}
-
-function renderBinarySearchStep(step) {
-  const arr = step.beforeArray || step.array || step.arr;
-  const target = 5;
-
-  if (!barInitDone) {
-    BarAnimator.init(arr);
-    barInitDone = true;
-  }
-
-  BarAnimator.clearStateClasses();
-
-  const low = step.low;
-  const high = step.high;
-  const mid = step.mid;
-
-  for (let i = 0; i < arr.length; i++) {
-    const bar = BarAnimator.getBarAtIndex(i);
-    if (!bar) continue;
-
-    // outside active range = grey (same behavior you had before)
-    if (low != null && high != null && (i < low || i > high)) {
-      bar.style.backgroundColor = "#ccc";
+    // 🔥 FIX: capture target if present
+    if (step.target !== undefined && cachedTarget === null) {
+      cachedTarget = step.target;
+      console.log(step.target)
     }
 
-    // mark low/high borders
-    if (i === low) bar.style.border = "2px solid blue";
-    if (i === high) bar.style.border = "2px solid red";
+    // Initialize bars ONCE with a VALID target
+    if (!barInitDone) {
+      BarAnimator.init(arr, cachedTarget);
+      barInitDone = true;
+    }
 
-    if (i === mid) {
-      showTargetMarker(bar, target);
+    // Clear only visual state (NOT target marker)
+    BarAnimator.clearStateClasses();
 
-      if (
-        step.found === true ||
-        step.isFound === true ||
-        step.foundIndex === mid
-      ) {
-        bar.classList.add("sorted");
-      } else {
-        bar.classList.add("current");
+    const low = typeof step.low === "number" ? step.low : null;
+    const high = typeof step.high === "number" ? step.high : null;
+    const mid = typeof step.mid === "number" ? step.mid : null;
+
+    for (let i = 0; i < arr.length; i++) {
+      const bar = BarAnimator.getBarAtIndex(i);
+      if (!bar) continue;
+
+      bar.style.backgroundColor = "";
+      bar.style.border = "";
+
+      // outside active range
+      if (low !== null && high !== null && (i < low || i > high)) {
+        bar.style.backgroundColor = "#ccc";
+      }
+
+      if (i === low) {
+        bar.style.border = "2px solid blue";
+        bar.style.backgroundColor = "blue";
+      }
+
+      if (i === high) {
+        bar.style.border = "2px solid red";
+        bar.style.backgroundColor = "red";
+      }
+
+      if (i === mid) {
+        let color = "#ff9800"; // orange
+
+        if (step.found === true || step.isFound === true) {
+          color = "#4caf50";
+          bar.classList.add("sorted");
+        } else {
+          bar.classList.add("current");
+        }
+
+        bar.style.border = `2px solid ${color}`;
+        bar.style.backgroundColor = color;
       }
     }
-
   }
-}
 
-// =========================
-// STEP CONTROLS
-// =========================
-async function playStep() {
-  if (!steps || currentIndex >= steps.length) return;
-  const step = steps[currentIndex];
+  // STEP CONTROLS
+  async function playStep() {
+    if (!Array.isArray(steps) || currentIndex >= steps.length) return;
+    renderBinarySearchStep(steps[currentIndex]);
+    currentIndex++;
+    await new Promise((r) => setTimeout(r, 700));
+  }
 
-  renderBinarySearchStep(step);
-  currentIndex++;
-  await new Promise((r) => setTimeout(r, 700));
-}
+  async function playStepReverse() {
+    if (!Array.isArray(steps) || currentIndex <= 0) return;
+    currentIndex--;
+    renderBinarySearchStep(steps[currentIndex]);
+    await new Promise((r) => setTimeout(r, 700));
+  }
 
-async function playStepReverse() {
-  if (!steps || currentIndex <= 0) return;
-  currentIndex--;
-  const step = steps[currentIndex];
+  function nextStep() {
+    if (interval) return;
+    playStep();
+  }
 
-  renderBinarySearchStep(step);
-  await new Promise((r) => setTimeout(r, 700));
-}
+  function prevStep() {
+    if (interval) return;
+    playStepReverse();
+  }
 
-function nextStep() {
-  playStep();
-}
-function prevStep() {
-  playStepReverse();
-}
+  async function autoPlay() {
+    const autoBtn = document.getElementById("autoBtn");
+    if (!autoBtn) return;
 
-async function autoPlay() {
-  const autoBtn = document.getElementById("autoBtn");
-  if (interval) {
-    clearInterval(interval);
-    interval = null;
-    autoBtn.textContent = "Auto";
-  } else {
+    if (interval) {
+      clearInterval(interval);
+      interval = null;
+      autoBtn.textContent = "Auto";
+      return;
+    }
+
     autoBtn.textContent = "Stop";
     interval = setInterval(async () => {
-      if (!steps || currentIndex >= steps.length) {
+      if (!Array.isArray(steps) || currentIndex >= steps.length) {
         clearInterval(interval);
         interval = null;
         autoBtn.textContent = "Auto";
-      } else {
-        await playStep();
+        return;
       }
-    }, 1000);
+      await playStep();
+    }, 900);
   }
-}
 
-// Attach buttons
-document.getElementById("nextBtn").addEventListener("click", nextStep);
-document.getElementById("prevBtn").addEventListener("click", prevStep);
-document.getElementById("autoBtn").addEventListener("click", autoPlay);
+  // Button bindings
+  document.getElementById("nextBtn")?.addEventListener("click", nextStep);
+  document.getElementById("prevBtn")?.addEventListener("click", prevStep);
+  document.getElementById("autoBtn")?.addEventListener("click", autoPlay);
 
-// Initial render
-if (steps && steps.length > 0) renderBinarySearchStep(steps[0]);
+  // Initial render
+  if (Array.isArray(steps) && steps.length > 0) {
+    currentIndex = 0;
+    renderBinarySearchStep(steps[0]);
+    currentIndex = 1;
+  }
+})();

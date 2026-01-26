@@ -90,10 +90,11 @@ public class mainController {
             Model m
     ) {
 
-        int[] arrayToSort = {1,2,3,4,5,6,7}; // Example array
+//        int[] arrayToSort = {1,2,3,4,5,6,7}; // Example array
+        int[] arrayToSort = {5,2,8,1,2,3,5}; // Example array
         Algorithm sorter = objectList.get(projectKey);
         if(sorter instanceof SearchAlgorithm)
-            ((SearchAlgorithm) sorter).setTarget(1);
+            ((SearchAlgorithm) sorter).setTarget(8  );
         sorter.implementAlgorithm(arrayToSort);
 
         m.addAttribute("steps", sorter.getSteps());

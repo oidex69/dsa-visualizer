@@ -30,7 +30,8 @@ public class LinearSearch implements SearchAlgorithm {
                     before,
                     i,
                     checkedIndicesArray.clone(), // clone to freeze state
-                    found
+                    found,
+                    target
             ));
 
             if (found) break;
