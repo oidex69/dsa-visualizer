@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- Header -->
-    <div th:replace="header :: header"></div>
+    <div th:replace="fragments:: header"></div>
     
     <!-- Main Content -->
     <main id="homeMain" class="home-main mt-header">
@@ -195,7 +195,7 @@
     </main>
     
     <!-- Footer -->
-    <div th:replace="footer :: footer"></div>
+    <div th:replace="fragments :: footer"></div>
 
     <!-- JavaScript -->
     <script th:src="@{/js/core/headerFooter.js}"></script>

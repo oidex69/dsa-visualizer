@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title th:text="${title}">Bubble Sort Visualization</title>
     <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
+    <link rel="stylesheet" th:href="@{/css/algoVis.css}">
 
     <style>
         /* =========================
@@ -210,23 +211,21 @@
     </style>
 </head>
 <body>
-<div th:replace="~{header :: header}"></div>
+    <div th:replace="~{fragments :: header}"></div>
+    <div class="viz-page">
+        <!-- <h1 th:text="${title}"></h1> -->
+        <div th:insert="~{fragments:: visInfo}"></div>
+        <div id="array-container"></div>
 
-<div class="viz-page">
-    <h1 th:text="${title}"></h1>
-
-    <div id="array-container"></div>
-
-    <div class="viz-controls">
-        <button id="prevBtn">Previous</button>
-        <button id="nextBtn">Next</button>
-        <button id="autoBtn">Auto</button>
+        <div class="viz-controls">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+            <button id="autoBtn">Auto</button>
+        </div>
     </div>
-</div>
+    <div th:replace="~{fragments :: footer}"></div>
 
-<div th:replace="~{footer :: footer}"></div>
-
-<script src="/js/core/barAnimator.js"></script>
+    <script src="/js/core/barAnimator.js"></script>
 
 <script th:inline="javascript">
     const title = [[${title}]]; // Thymeleaf injects the page title

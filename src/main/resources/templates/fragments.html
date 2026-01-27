@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Header Fragment -->
+    <header th:fragment="header" class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo Section -->
+                <div class="logo-section">
+                    <a th:href="@{/}" class="logo-link">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M20 15L28 20V28L20 33L12 28V20L20 15Z" fill="currentColor" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">AlgoViz</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a th:href="@{/}" class="nav-link">
+                            <span class="link-text">Home</span>
+                            <span class="link-underline"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/canvas}" class="nav-link">
+                            <span class="link-text">Visualizer</span>
+                            <span class="link-underline"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- GitHub Button -->
+                <div class="nav-actions">
+                    <a href="https://github.com/oidex69/dsa-visualizer" target="_blank" class="github-btn">
+                        <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li class="mobile-nav-item">
+                    <a th:href="@{/}" class="mobile-nav-link">Home</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a th:href="@{/canvas}" class="mobile-nav-link">Visualizer</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="https://github.com/yourusername/algoviz" target="_blank" class="mobile-nav-link">
+                        GitHub
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Footer Fragment -->
+    <footer th:fragment="footer" class="main-footer">
+        <div class="footer-container">
+            <!-- Footer Top Section -->
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M20 15L28 20V28L20 33L12 28V20L20 15Z" fill="currentColor" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="footer-title">AlgoViz</h3>
+                    <p class="footer-description">
+                        Interactive algorithm visualization platform for learning and understanding data structures and algorithms.
+                    </p>
+                </div>
+
+                <div class="footer-links-group">
+                    <div class="footer-section">
+                        <h4 class="footer-section-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a th:href="@{/}" class="footer-link">Home</a></li>
+                            <li><a th:href="@{/canvas}" class="footer-link">Visualizer</a></li>
+                            <li><a th:href="@{/about}" class="footer-link">About</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="footer-section-title">Algorithms</h4>
+                        <ul class="footer-links">
+                            <li><a th:href="@{/canvas(type='Sorting')}" class="footer-link">Sorting</a></li>
+                            <li><a th:href="@{/canvas(type='Searching')}" class="footer-link">Searching</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="footer-section-title">Connect</h4>
+                        <ul class="footer-links">
+                            <li>
+                                <a href="https://github.com/oidex69/dsa-visualizer" target="_blank" class="footer-link">
+                                    GitHub
+                                </a>
+                            </li>
+                            <li><a href="mailto:ronakmaharjan13@gmail.com" class="footer-link">Contact</a></li>
+                            <!-- <li><a th:href="@{/contribute}" class="footer-link">Contribute</a></li>
+                            <li><a th:href="@{/feedback}" class="footer-link">Feedback</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Section -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        &copy; 2024 AlgoViz. All rights reserved.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/oidex69/dsa-visualizer" target="_blank" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/yourusername" target="_blank" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Wave -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/>
+            </svg>
+        </div>
+    </footer>
+
+    <!-- Info Division Fragment -->
+    <div th:fragment="infoDivision" class="info-division">
+        <div class="info-container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Algorithm Visualizer</span>
+                    </h1>
+                    <p class="hero-description">
+                        Explore and understand algorithms through interactive visualizations. 
+                        Watch how different sorting and searching algorithms work in real-time.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Algorithms Section -->
+            <section class="algorithms-section">
+                <div th:each="category : ${algorithms}" class="algorithm-category">
+                    <!-- Category Header -->
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <svg th:if="${category.key == 'Sorting'}" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                            </svg>
+                            <svg th:if="${category.key == 'Searching'}" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <h2 class="category-title" th:text="${category.key}">Category</h2>
+                        <div class="category-line"></div>
+                    </div>
+
+                    <!-- Algorithm Cards Grid -->
+                    <div class="cards-grid">
+                        <div th:each="algo : ${category.value}" class="algorithm-card">
+                            <div class="card-glow"></div>
+                            <div class="card-content">
+                                <!-- Card Icon -->
+                                <div class="card-icon-wrapper">
+                                    <div class="card-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Card Info -->
+                                <div class="card-info">
+                                    <h3 class="card-title" th:text="${algo.algorithmName}">Algorithm Name</h3>
+                                    <p class="card-description">
+                                        Click to visualize how 
+                                        <span th:text="${algo.algorithmName}">this algorithm</span> 
+                                        works step by step
+                                    </p>
+                                </div>
+
+                                <!-- Card Action -->
+                                <a th:href="${algo.link}" class="card-button">
+                                    <span>Visualize</span>
+                                    <svg class="button-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Algorithm Information Fragment -->
+    <div th:fragment="visInfo" class="algorithm-info">
+        <h1 class="algorithm-title" th:text="${title}">Bubble Sort</h1>
+        <p class="algorithm-description">
+            Lorem Ipsum
+        </p>
+        <div class="algorithm-metrics">
+            <div class="metric-badge">
+                <span class="metric-label">Time Complexity:</span>
+                <span class="metric-value">Lorem Ipsum</span>
+            </div>
+            <div class="metric-badge">
+                <span class="metric-label">Space Complexity:</span>
+                <span class="metric-value">Lorem Ipsum</span>
+            </div>
+            <div class="metric-badge">
+                <span class="metric-label">Category:</span>
+                <span class="metric-value">Lorem Ipsum</span>
+            </div>
+            <div class="metric-badge">
+                <span class="metric-label">Difficulty:</span>
+                <span class="metric-value">Lorem Ipsum</span>
+            </div>
+            <div class="metric-badge">
+                <span class="metric-label">Reference:</span>
+                <span class="metric-value">Lorem Ipsum</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Array Control Panel Fragment -->
+    <div th:fragment="arrayControl" id="arrayControlPanel" class="algorithm-info">
+        <div class="panel-content">
+            <!-- Array Size Slider -->
+            <div class="slider-group">
+                <label for="arraySizeSlider" class="slider-label">
+                    <span>Size</span>
+                    <span id="arraySizeValue" class="slider-value">10</span>
+                </label>
+                <input 
+                    type="range" 
+                    id="arraySizeSlider" 
+                    class="array-slider" 
+                    min="5" 
+                    max="100" 
+                    value="10"
+                >
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="button-group">
+                <button id="generateBtn" class="panel-btn btn-generate">
+                    Generate New Array
+                </button>
+                <button id="sortBtn" class="panel-btn btn-sort">
+                    Sort
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Color Legend Fragment (old class:bottom-panel)-->
+    <div th:fragment="colorLegend" id="colorLegendPanel" class="algorithm-info">
+        <div class="panel-content">
+            <div class="legend-items">
+                <div class="legend-row">
+                    <div class="legend-box">
+                        <span class="color-box box-default"></span>
+                        <span class="legend-label">Unsorted</span>
+                    </div>
+                    <div class="legend-box">
+                        <span class="color-box box-comparing"></span>
+                        <span class="legend-label">Comparing</span>
+                    </div>
+                    <div class="legend-box">
+                        <span class="color-box box-sorted"></span>
+                        <span class="legend-label">Sorted</span>
+                    </div>
+                </div>
+                <div class="legend-row">
+                    <div class="legend-box">
+                        <span class="color-box box-pivot"></span>
+                        <span class="legend-label">Pivot</span>
+                    </div>
+                    <div class="legend-box">
+                        <span class="color-box box-min"></span>
+                        <span class="legend-label">Min</span>
+                    </div>
+                    <div class="legend-box">
+                        <span class="color-box box-swap"></span>
+                        <span class="legend-label">Swap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Combined Bottom Controls Fragment -->
+    <div th:fragment="bottomControls" id="bottomControlsContainer">
+        <div class="bottom-controls-wrapper">
+            <div th:replace="~{fragments :: arrayControl}"></div>
+            <div th:replace="~{fragments :: colorLegend}"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,15 +8,15 @@
 </head>
 <body>
     <!-- Header -->
-    <header th:insert="~{header :: header}"></header>
+    <header th:insert="~{fragments :: header}"></header>
     
     <!-- Main Content -->
     <main>
-        <div th:insert="~{infoDiv :: infoDivision}"></div>
+        <div th:insert="~{fragments:: infoDivision}"></div>
     </main>
     
     <!-- Footer -->
-    <footer th:insert="~{footer :: footer}"></footer>
+    <footer th:insert="~{fragments :: footer}"></footer>
 
     <script th:src="@{/core/headerFooter.js}"></script>
 
