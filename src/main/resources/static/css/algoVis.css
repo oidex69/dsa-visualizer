@@ -38,6 +38,21 @@
     gap: 1rem;
 }
 
+.metric-badge.difficulty-Easy {
+    background-color: #28a745;
+
+    color: #ffffff;
+}
+.metric-badge.difficulty-Medium {
+    background-color: #ffc107;
+    color: #212529;
+}
+.metric-badge.difficulty-Hard {
+    background-color: #dc3545;
+    opacity: 2.;
+    color: #ffffff;
+}
+
 .metric-badge {
     display: inline-flex;
     align-items: center;

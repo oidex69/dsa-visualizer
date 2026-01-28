@@ -1,0 +1,51 @@
+{
+  "LinearSearch": {
+    "description": "Linear Search (or Sequential Search) is the simplest searching algorithm. It examines each element in the list one by one until the target element is found or the list ends. It does not require the array to be sorted, making it versatile but inefficient for large datasets. It is best suited for small collections or unsorted data where simplicity is more important than speed.",
+    "timeComplexity": "O(N)",
+    "sapceComplexity": "O(1)",
+    "category": "searching",
+    "difficulty": "Easy"
+  },
+  "BinarySearch": {
+    "description": "Binary Search is a highly efficient algorithm for finding an element in a sorted array. It works by repeatedly dividing the search interval in half: comparing the target with the middle element, discarding half of the array each time. This logarithmic reduction makes it much faster than linear search, but it requires the input to be sorted beforehand.",
+    "timeComplexity": "O(log N)",
+    "sapceComplexity": "O(1)",
+    "category": "searching",
+    "difficulty": "Medium"
+  },
+  "BubbleSort": {
+    "description": "Bubble Sort is a simple comparison-based sorting algorithm. It repeatedly traverses the list, comparing adjacent elements and swapping them if they are in the wrong order. Each pass 'bubbles' the largest unsorted element to its correct position. While easy to understand and implement, it is inefficient for large datasets and mainly used for teaching or very small arrays.",
+    "timeComplexity": "O(N^2)",
+    "sapceComplexity": "O(1)",
+    "category": "sorting",
+    "difficulty": "Easy"
+  },
+  "QuickSort": {
+    "description": "Quick Sort is a divide-and-conquer algorithm that sorts by selecting a pivot element, partitioning the array into two subarrays (elements less than the pivot and elements greater than the pivot), and recursively sorting the subarrays. It is one of the fastest general-purpose sorting algorithms, but performance depends on pivot choice. With good pivot selection, it achieves excellent average-case efficiency.",
+    "timeComplexity": "O(N log N)",
+    "sapceComplexity": "O(log N)",
+    "category": "sorting",
+    "difficulty": "Hard"
+  },
+  "InsertionSort": {
+    "description": "Insertion Sort builds a sorted array one element at a time. It takes each new element and inserts it into its correct position among the already sorted elements. This makes it efficient for small datasets or nearly sorted arrays, but its quadratic time complexity makes it unsuitable for large datasets.",
+    "timeComplexity": "O(N^2)",
+    "sapceComplexity": "O(1)",
+    "category": "sorting",
+    "difficulty": "Easy"
+  },
+  "SelectionSort": {
+    "description": "Selection Sort repeatedly selects the smallest (or largest) element from the unsorted portion of the array and swaps it with the first unsorted element. This process continues until the entire array is sorted. It performs fewer swaps than Bubble Sort but still requires quadratic comparisons, making it inefficient for large datasets.",
+    "timeComplexity": "O(N^2)",
+    "sapceComplexity": "O(1)",
+    "category": "sorting",
+    "difficulty": "Easy"
+  },
+  "MergeSort": {
+    "description": "Merge Sort is a divide-and-conquer algorithm that splits the array into halves, recursively sorts each half, and then merges the sorted halves into a single sorted array. Its predictable performance and stability make it a reliable choice for large datasets, though it requires additional memory for merging.",
+    "timeComplexity": "O(N log N)",
+    "sapceComplexity": "O(N)",
+    "category": "sorting",
+    "difficulty": "Medium"
+  }
+}

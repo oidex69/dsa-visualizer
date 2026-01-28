@@ -212,6 +212,7 @@
 </head>
 <body>
     <div th:replace="~{fragments :: header}"></div>
+
     <div class="viz-page">
         <!-- <h1 th:text="${title}"></h1> -->
         <div th:insert="~{fragments:: visInfo}"></div>
@@ -228,6 +229,26 @@
     <script src="/js/core/barAnimator.js"></script>
 
 <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        // Use title to fetch algorithm details
+        fetch("/algo/" + title, { headers: { "Accept": "application/json" } })
+            .then(response => response.json())
+            .then(data => {
+                const description = document.querySelector(".algorithm-description");
+                const timeComplexity = document.querySelector(".timeComplexity");
+                const spaceComplexity = document.querySelector(".spaceComplexity");
+                const category = document.querySelector(".category");
+                const difficulty = document.querySelector(".difficulty");
+
+                description.innerText = data.description || "No description available";
+                timeComplexity.innerText =  data.timeComplexity || "No Time Complexity";
+                spaceComplexity.innerText = data.sapceComplexity || "No Space Complexity";
+                category.innerText = data.category || "No Category mentioned";
+                difficulty.innerText = data.difficulty || "No difficulty set";
+                document.querySelector(".difficulty").closest(".metric-badge").classList.add("difficulty-"+data.difficulty);
+            });
+    });
+
     const title = [[${title}]]; // Thymeleaf injects the page title
     let steps = [[${steps}]]; // Thymeleaf injects backend precomputed steps
     let scriptFile = '';
@@ -236,14 +257,14 @@
         scriptFile = '/js/selectionSort.js';
     } else if (title === 'BubbleSort' || title === 'InsertionSort') {
         scriptFile = '/js/bubbleAndInsertion.js';
-    } else if(title === 'MergeSort') {
-        scriptFile ='/js/mergeSort.js';
-    } else if (title === 'QuickSort'){
+    } else if (title === 'MergeSort') {
+        scriptFile = '/js/mergeSort.js';
+    } else if (title === 'QuickSort') {
         scriptFile = '/js/quickSort.js';
-    } else if ( title === 'LinearSearch') {
+    } else if (title === 'LinearSearch') {
         scriptFile = '/js/linearSearch.js';
-    } else if ( title === 'BinarySearch') {
-        scriptFile = "/js/binarySearch.js";
+    } else if (title === 'BinarySearch') {
+        scriptFile = '/js/binarySearch.js';
     }
 
     function loadScript(src, cb) {

@@ -6,33 +6,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.bind.annotation.RestController;
 import zpt.dsaVis.algorithms.Sorting.*;
 import zpt.dsaVis.algorithms.searching.BinarySearch;
 import zpt.dsaVis.algorithms.searching.LinearSearch;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class mainController {
-    Map<String, List<algorithmDetail>> high;
+    Map<String, List<AlgorithmDetails>> high;
     Map<String, Algorithm> objectList;
 
         mainController() {
             high = Map.of(
                 "Sorting", List.of(
-                        new algorithmDetail("BubbleSort","/algo/BubbleSort"),
-                        new algorithmDetail("QuickSort","/algo/QuickSort"),
-                        new algorithmDetail("InsertionSort","/algo/InsertionSort"),
-                        new algorithmDetail("SelectionSort","/algo/SelectionSort"),
-                        new algorithmDetail("MergeSort","/algo/MergeSort"),
-                        new algorithmDetail("RadixSort","/algo/RadixSort")
+                        new AlgorithmDetails("BubbleSort","/algo/BubbleSort"),
+                        new AlgorithmDetails("QuickSort","/algo/QuickSort"),
+                        new AlgorithmDetails("InsertionSort","/algo/InsertionSort"),
+                        new AlgorithmDetails("SelectionSort","/algo/SelectionSort"),
+                        new AlgorithmDetails("MergeSort","/algo/MergeSort"),
+                        new AlgorithmDetails("RadixSort","/algo/RadixSort")
                 ),
                 "Searching", List.of(
-                        new algorithmDetail("LinearSearch","/algo/LinearSearch"),
-                        new algorithmDetail("BinarySearch","/algo/BinarySearch")
+                        new AlgorithmDetails("LinearSearch","/algo/LinearSearch"),
+                        new AlgorithmDetails("BinarySearch","/algo/BinarySearch")
                 )
             );
 
@@ -67,7 +66,7 @@ public class mainController {
     public String canvas(
     @RequestParam(value = "type", required = false) String type,Model m) 
     {
-        Map<String, List<algorithmDetail>> filteredAlgorithms;
+        Map<String, List<AlgorithmDetails>> filteredAlgorithms;
         
         if (type != null) {
             String normalizedType = type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase();
@@ -89,7 +88,6 @@ public class mainController {
             @PathVariable String projectKey,
             Model m
     ) {
-
 //        int[] arrayToSort = {1,2,3,4,5,6,7}; // Example array
         int[] arrayToSort = {5,2,8,1,2,3,5}; // Example array
         Algorithm sorter = objectList.get(projectKey);
