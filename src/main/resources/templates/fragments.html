@@ -21,7 +21,7 @@
                 <!-- Navigation Links -->
                 <ul class="nav-links">
                     <li class="nav-item">
-                        <a th:href="@{/}" class="nav-link">
+                        <a th:href="@{/homepage}" class="nav-link">
                             <span class="link-text">Home</span>
                             <span class="link-underline"></span>
                         </a>
@@ -29,6 +29,12 @@
                     <li class="nav-item">
                         <a th:href="@{/canvas}" class="nav-link">
                             <span class="link-text">Visualizer</span>
+                            <span class="link-underline"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/about}" class="nav-link">
+                            <span class="link-text">About</span>
                             <span class="link-underline"></span>
                         </a>
                     </li>
@@ -57,10 +63,13 @@
         <div class="mobile-menu">
             <ul class="mobile-nav-links">
                 <li class="mobile-nav-item">
-                    <a th:href="@{/}" class="mobile-nav-link">Home</a>
+                    <a th:href="@{/homepage}" class="mobile-nav-link">Home</a>
                 </li>
                 <li class="mobile-nav-item">
                     <a th:href="@{/canvas}" class="mobile-nav-link">Visualizer</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a th:href="@{/about}" class="mobile-nav-link">About</a>
                 </li>
                 <li class="mobile-nav-item">
                     <a href="https://github.com/yourusername/algoviz" target="_blank" class="mobile-nav-link">
@@ -333,5 +342,6 @@
             <div th:replace="~{fragments :: colorLegend}"></div>
         </div>
     </div>
+
 </body>
 </html>

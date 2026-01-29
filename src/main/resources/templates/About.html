@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AlgoViz</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
+    <link rel="stylesheet" th:href="${aboutCss}">
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="fragments :: header"></div>
+
+    <!-- Main Content -->
+    <main class="mt-header">
+        <!-- Team About Fragment -->
+        <div th:replace = "aboutFragments :: simpleAbout"></div>
+        <!-- <div th:replace="aboutFragments :: teamAbout"></div> -->
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="fragments :: footer"></div>
+
+    <!-- JavaScript -->
+    <script th:src="@{/core/headerFooter.js}"></script>
+</body>
+</html>

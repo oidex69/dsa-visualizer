@@ -55,17 +55,18 @@ if (header) {
 function setActiveNavLink() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        
-        // Check if current path matches the link
-        if (currentPath === linkHref || 
-            (currentPath === '/' && linkHref === '/') ||
-            (currentPath.includes('/canvas') && linkHref.includes('/canvas'))) {
+        const linkPath = new URL(link.href).pathname;
+
+        // Home page fix
+        if (
+            (linkPath === '/' && (currentPath === '/' || currentPath === '/homepage')) ||
+            (linkPath !== '/' && currentPath.startsWith(linkPath))
+        ) {
             link.classList.add('active');
         } else {
-            link.classList.remove('active');
+            // link.classList.remove('active');
         }
     });
 }

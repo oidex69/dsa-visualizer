@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <!-- Team About Fragment -->
+    <div th:fragment="teamAbout" id="teamAboutSection" class="about-section">
+        <div class="about-container">
+            
+            <!-- Section Header -->
+            <div class="about-header">
+                <h1 class="about-title">
+                    <span class="gradient-text">About Our Team</span>
+                </h1>
+                <p class="about-subtitle">
+                    Meet the developers behind AlgoViz - passionate about making algorithms accessible to everyone
+                </p>
+            </div>
+
+            <!-- Team Members Grid -->
+            <div class="team-grid">
+                
+                <!-- Team Member 1 -->
+                <div th:each="member : ${teamMembers}" class="team-member-card">
+                    <div class="member-image-wrapper">
+                        <div class="member-image">
+                            <img th:src="${member.image}" th:alt="${member.name}" class="profile-img">
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                    
+                    <div class="member-info">
+                        <h3 class="member-name" th:text="${member.name}">Team Member</h3>
+                        <p class="member-role" th:text="${member.role}">Role</p>
+                        <p class="member-bio" th:text="${member.bio}">
+                            Bio description goes here
+                        </p>
+                    </div>
+                    
+                    <div class="member-socials">
+                        <a th:href="${member.github}" target="_blank" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a th:href="${member.linkedin}" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                        <a th:href="${member.twitter}" target="_blank" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Project Info -->
+            <div class="project-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4 class="info-title">Our Mission</h4>
+                        <p class="info-text">
+                            Making complex algorithms easy to understand through interactive visualizations
+                            and step-by-step explanations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4 class="info-title">Built With</h4>
+                        <p class="info-text">
+                            Spring Boot, Thymeleaf, JavaScript, and lots of passion for education and technology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Simple About Fragment (No Loop) -->
+    <div th:fragment="simpleAbout" id="simpleAboutSection" class="about-section">
+        <div class="about-container">
+            
+            <div class="about-header">
+                <h1 class="about-title">
+                    <span class="gradient-text">About Our Team</span>
+                </h1>
+                <p class="about-subtitle">
+                    Meet the developers behind AlgoViz
+                </p>
+            </div>
+
+            <div class="team-grid">
+                
+                <!-- Member 1 -->
+                <div class="team-member-card">
+                    <div class="member-image-wrapper">
+                        <div class="member-image">
+                            <img src="/image/pic/ronak.jpg" alt="Team Member 1" class="profile-img">
+                        </div>
+                        <!-- <div class="status-indicator"></div> -->
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Ronak Maharjan</h3>
+                        <p class="member-role">Frontend Developer</p>
+                        <p class="member-bio">
+                            Focused on creating beautiful and accessible learning experiences.
+                        </p>
+                    </div>
+                    <div class="member-socials">
+                        <a href="https://github.com/RonakMrjn" target="_blank" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/ronak" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="team-member-card">
+                    <div class="member-image-wrapper">
+                        <div class="member-image">
+                            <img src="/image/pic/prince.jpg" alt="Team Member 2" class="profile-img">
+                        </div>
+                        <!-- <div class="status-indicator"></div> -->
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Prince Shrestha</h3>
+                        <p class="member-role">Backend Developer</p>
+                        <p class="member-bio">
+                            Expert in algorithm implementation and optimization for better performance.
+                        </p>
+                    </div>
+                    <div class="member-socials">
+                        <a href="https://github.com/oidex69" target="_blank" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/member2" target="_blank" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="team-member-card">
+                    <div class="member-image-wrapper">
+                        <div class="member-image">
+                            <img src="/image/pic/nabish.jpg" alt="Team Member 3" class="profile-img">
+                        </div>
+                        <!-- <div class="status-indicator"></div> -->
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Nabish Shrestha</h3>
+                        <p class="member-role">Backend Developer</p>
+                        <p class="member-bio">
+                            Expert in algorithm implementation and optimization for better performance.
+                        </p>
+                    </div>
+                    <div class="member-socials">
+                        <a href="https://github.com/thatguy-Nabis" target="_blank" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/member3" target="_blank" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Project Info -->
+            <div class="project-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4 class="info-title">Our Mission</h4>
+                        <p class="info-text">
+                            Making complex algorithms easy to understand through interactive visualizations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4 class="info-title">Built With</h4>
+                        <p class="info-text">
+                            Spring Boot, Thymeleaf, JavaScript, and lots of passion.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -11,6 +11,7 @@ import zpt.dsaVis.algorithms.Sorting.*;
 import zpt.dsaVis.algorithms.searching.BinarySearch;
 import zpt.dsaVis.algorithms.searching.LinearSearch;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class mainController {
 
         }
 
-    @GetMapping("/")
+    @GetMapping("/homepage")
     public String homePage(Model m) {
         // List<data> listOfPeople = new ArrayList<>();
         // listOfPeople.add(
@@ -82,6 +83,18 @@ public class mainController {
         m.addAttribute("infoDivCss","/css/infoDiv.css");
         return "canvas";
     }
+
+    @GetMapping("/about")
+    public String about(Model m) {
+    m.addAttribute("aboutCss","/css/about.css");
+    return "about";
+}
+
+    // @GetMapping("/about")
+    // public String aboutPage(Model m) {
+    //     m.addAttribute("homePageCss","/css/homepage.css");
+    //     return "About";
+    // }
 
     @GetMapping("/algo/{projectKey}")
     public String mainFunction(
