@@ -48,7 +48,7 @@ public class mainController {
 
         }
 
-    @GetMapping("/homepage")
+    @GetMapping("/")
     public String homePage(Model m) {
         // List<data> listOfPeople = new ArrayList<>();
         // listOfPeople.add(
